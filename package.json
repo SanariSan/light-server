@@ -1,0 +1,23 @@
+{
+  "name": "remote",
+  "version": "1.0.0",
+  "main": "./src/app.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./node_modules/cross-env/src/bin/cross-env.js NODE_ENV=production node -r dotenv/config ./src/app.js",
+    "mon": "node ./node_modules/cross-env/src/bin/cross-env.js NODE_ENV=production node -r dotenv/config ./node_modules/nodemon/bin/nodemon.js ./src/app.js",
+    "exe-win": "node ./node_modules/pkg/lib-es5/bin.js -t node16-win ./src/app.js",
+    "exe-lin": "node ./node_modules/pkg/lib-es5/bin.js -t node16-linux ./src/app.js",
+    "format": "./node_modules/prettier/bin-prettier.js -w --config ./.prettierrc ."
+  },
+  "devDependencies": {
+    "@types/node": "^16.0.0",
+    "nodemon": "^2.0.19",
+    "prettier": "^2.7.1"
+  },
+  "dependencies": {
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.2",
+    "pkg": "^5.8.0"
+  }
+}
