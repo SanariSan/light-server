@@ -173,3 +173,4 @@ dist*
 *.md
 *.env*
 !.env.copy
+.github/**/*

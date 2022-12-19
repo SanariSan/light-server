@@ -66,4 +66,9 @@ server.on('request', async (req, res) => {
   }
 });
 
+console.log('-');
+// console.log(process.env.HOST, process.env.PORT);
+console.log(process.env);
+console.log('-');
+
 server.listen(process.env.PORT, process.env.HOST);

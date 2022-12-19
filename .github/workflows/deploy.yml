@@ -20,11 +20,24 @@ jobs:
           source: '.'
           target: '/root/code/light-server'
 
+      - name: Dotenv Action
+        id: dotenv
+        uses: falti/dotenv-action@v1.0.2
+
       - name: Executing remote command
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.HOST }}
+          HOST: ${{ secrets.HOST }}
           USERNAME: ${{ secrets.USERNAME }}
           PORT: ${{ secrets.PORT }}
           KEY: ${{ secrets.SSHKEY }}
-          script: ls
+          script: >
+            cd /root/code/light-server &&
+            docker container stop light-server ||
+            docker build -t light-server . &&
+            docker run -d --rm
+            --env HOST=${{ steps.dotenv.outputs.HOST }}
+            --env PORT=${{ steps.dotenv.outputs.PORT }}
+            --env VIRTUAL_HOST=${{ steps.dotenv.outputs.VIRTUAL_HOST }}
+            --env LETSENCRYPT_HOST=${{ steps.dotenv.outputs.LETSENCRYPT_HOST }}
+            --name light-server light-server
